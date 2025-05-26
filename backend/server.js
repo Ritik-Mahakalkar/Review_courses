@@ -5,16 +5,16 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// MySQL connection
+
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',         // your MySQL username
-  password: '123456789',         // your MySQL password
-  database: 'course_db' // your database name
+  user: 'root',         
+  password: '123456789',        
+  database: 'course_db' 
 });
 
 db.connect((err) => {
@@ -25,7 +25,7 @@ db.connect((err) => {
   }
 });
 
-// Create reviews table if it doesn't exist
+
 db.query(`
   CREATE TABLE IF NOT EXISTS reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -37,9 +37,7 @@ db.query(`
   )
 `);
 
-// ====================== API ROUTES ====================== //
 
-// POST /api/reviews - Add a new review
 app.post('/api/reviews', (req, res) => {
   const { userId, courseId, rating, comment } = req.body;
 
@@ -57,7 +55,7 @@ app.post('/api/reviews', (req, res) => {
   });
 });
 
-// GET /api/reviews/course/:courseId - Get all reviews for a course
+
 app.get('/api/reviews/course/:courseId', (req, res) => {
   const courseId = req.params.courseId;
   const sql = `
@@ -71,7 +69,7 @@ app.get('/api/reviews/course/:courseId', (req, res) => {
   });
 });
 
-// GET /api/reviews/average/:courseId - Get average rating for a course
+
 app.get('/api/reviews/average/:courseId', (req, res) => {
   const courseId = req.params.courseId;
   const sql = `
@@ -85,7 +83,7 @@ app.get('/api/reviews/average/:courseId', (req, res) => {
   });
 });
 
-// Start server
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

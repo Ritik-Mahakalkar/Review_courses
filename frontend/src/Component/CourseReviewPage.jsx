@@ -12,19 +12,19 @@ const CourseReviewPage = ({ courseId, userId }) => {
 
   const api = 'http://localhost:5000/api';
 
-  // Fetch reviews
+
   const fetchReviews = async () => {
     const res = await axios.get(`http://localhost:5000/api/reviews/course/${courseId}`);
     setReviews(res.data);
   };
 
-  // Fetch average rating
+  
   const fetchAverage = async () => {
     const res = await axios.get(`http://localhost:5000/api/reviews/average/${courseId}`);
     setAvgRating(Number(res.data.average).toFixed(1));
   };
 
-  // Submit review
+  
   const submitReview = async (e) => {
     e.preventDefault();
     if (!rating || !comment.trim()) return;
